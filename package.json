@@ -11,7 +11,7 @@
     "serve:ssr:botellas_mesas": "node dist/botellas_mesas/server/server.mjs"
   },
   "engines": {
-    "node": "18.x",
+    "node": "20.x",
     "npm": "10.x"
   },
   "prettier": {
