@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "build:prod": "ng build --configuration production",
     "serve:ssr:botellas_mesas": "node dist/botellas_mesas/server/server.mjs"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "10.x"
   },
   "prettier": {
     "printWidth": 100,
