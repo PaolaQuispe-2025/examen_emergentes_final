@@ -1,0 +1,177 @@
+.botellas-container {
+  min-height: calc(100vh - 80px);
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #ff1493;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: #8b2d5b;
+}
+
+/* Formulario */
+.form-card {
+  background: white;
+  border-radius: 25px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(255, 105, 180, 0.15);
+}
+
+.form-title {
+  color: #ff1493;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #8b2d5b;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.form-control {
+  padding: 0.8rem;
+  border: 2px solid #ffb3d9;
+  border-radius: 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #fff5f8;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #ff69b4;
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+  background: white;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-sm {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+/* Lista de botellas */
+.list-section {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 182, 193, 0.3));
+  border-radius: 25px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(255, 105, 180, 0.15);
+}
+
+.list-title {
+  color: #ff1493;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #8b2d5b;
+  font-size: 1.2rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.botella-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(255, 105, 180, 0.1);
+  transition: all 0.3s ease;
+  border: 3px solid #ffb3d9;
+}
+
+.botella-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(255, 105, 180, 0.2);
+  border-color: #ff69b4;
+}
+
+.botella-card.vacia {
+  border-color: #ffd4eb;
+  opacity: 0.8;
+}
+
+.card-header {
+  margin-bottom: 1rem;
+}
+
+.card-status {
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.botella-card.vacia .card-status {
+  background: linear-gradient(135deg, #ffb3d9, #ff85c0);
+}
+
+.card-body {
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  color: #ff1493;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-details p {
+  color: #666;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: space-between;
+}
+
+.card-actions button {
+  flex: 1;
+}

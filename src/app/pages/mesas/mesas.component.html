@@ -1,0 +1,175 @@
+<div class="mesas-container fade-in">
+  <div class="header-section">
+    <h1 class="page-title">🪑 Gestión de Mesas</h1>
+    <p class="page-subtitle">Organiza y administra las mesas del establecimiento</p>
+  </div>
+
+  <!-- Formulario de creación/edición -->
+  <div class="form-card">
+    <h2 class="form-title">
+      {{ editingId ? '✏️ Editar Mesa' : '➕ Crear Nueva Mesa' }}
+    </h2>
+    
+    <form class="mesa-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="numero">🔢 Número de Mesa</label>
+          <input
+            type="text"
+            id="numero"
+            [(ngModel)]="nuevaMesa.numero"
+            name="numero"
+            placeholder="Ej: Mesa 1"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="ubicacion">📍 Ubicación</label>
+          <input
+            type="text"
+            id="ubicacion"
+            [(ngModel)]="nuevaMesa.ubicacion"
+            name="ubicacion"
+            placeholder="Ej: Terraza, Salón Principal"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="capacidad">👥 Capacidad (personas)</label>
+          <input
+            type="number"
+            id="capacidad"
+            [(ngModel)]="nuevaMesa.capacidad"
+            name="capacidad"
+            placeholder="0"
+            min="1"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="botella">🍾 Botella Asignada</label>
+          <select
+            id="botella"
+            [(ngModel)]="nuevaMesa.botellaId"
+            name="botella"
+            class="form-control"
+          >
+            <option [ngValue]="null">Sin asignar</option>
+            <option 
+              *ngFor="let botella of botellasDisponibles" 
+              [ngValue]="botella.id"
+            >
+              {{ botella.marca }} - {{ botella.tipo }} ({{ botella.capacidadLitros }}L)
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          (click)="agregarMesa()"
+          class="btn btn-success"
+        >
+          {{ editingId ? '💾 Guardar Cambios' : '➕ Agregar Mesa' }}
+        </button>
+        
+        <button
+          *ngIf="editingId"
+          type="button"
+          (click)="cancelarEdicion()"
+          class="btn btn-warning"
+        >
+          ❌ Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de mesas -->
+  <div class="list-section">
+    <h2 class="list-title">📋 Lista de Mesas</h2>
+    
+    <div *ngIf="mesas.length === 0" class="empty-state">
+      <p>No hay mesas registradas. ¡Crea la primera!</p>
+    </div>
+
+    <div class="cards-grid">
+      <div
+        *ngFor="let mesa of mesas"
+        class="mesa-card"
+        [class.con-botella]="mesa.botellaId"
+      >
+        <div class="card-header">
+          <span class="card-badge">{{ mesa.numero }}</span>
+          <span 
+            class="card-status" 
+            [class.asignada]="mesa.botellaId"
+          >
+            {{ mesa.botellaId ? '🍾 Con Botella' : '⭕ Sin Botella' }}
+          </span>
+        </div>
+        
+        <div class="card-body">
+          <div class="mesa-icon">🪑</div>
+          <div class="card-details">
+            <p><strong>📍 Ubicación:</strong> {{ mesa.ubicacion }}</p>
+            <p><strong>👥 Capacidad:</strong> {{ mesa.capacidad }} personas</p>
+            
+            <div *ngIf="mesa.botellaId" class="botella-info">
+              <p class="botella-title">🍾 Botella asignada:</p>
+              <div class="botella-detail">
+                <span>{{ getBotellaInfo(mesa.botellaId) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button
+            (click)="editarMesa(mesa)"
+            class="btn btn-warning btn-sm"
+          >
+            ✏️ Editar
+          </button>
+          <button
+            (click)="eliminarMesa(mesa.id)"
+            class="btn btn-danger btn-sm"
+          >
+            🗑️ Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de estadísticas -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-icon">🪑</div>
+      <div class="stat-content">
+        <h3>Total Mesas</h3>
+        <p class="stat-number">{{ mesas.length }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🍾</div>
+      <div class="stat-content">
+        <h3>Mesas con Botella</h3>
+        <p class="stat-number">{{ mesasConBotella() }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div class="stat-content">
+        <h3>Capacidad Total</h3>
+        <p class="stat-number">{{ capacidadTotal() }}</p>
+      </div>
+    </div>
+  </div>
+</div>

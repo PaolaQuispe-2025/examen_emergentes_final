@@ -1,0 +1,135 @@
+<div class="botellas-container fade-in">
+  <div class="header-section">
+    <h1 class="page-title">🍾 Gestión de Botellas</h1>
+    <p class="page-subtitle">Administra tu inventario de bebidas</p>
+  </div>
+
+  <!-- Formulario de creación/edición -->
+  <div class="form-card">
+    <h2 class="form-title">
+      {{ editingId ? '✏️ Editar Botella' : '➕ Crear Nueva Botella' }}
+    </h2>
+    
+    <form class="botella-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="marca">🏷️ Marca</label>
+          <input
+            type="text"
+            id="marca"
+            [(ngModel)]="nuevaBotella.marca"
+            name="marca"
+            placeholder="Ej: Coca Cola"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tipo">🥤 Tipo</label>
+          <input
+            type="text"
+            id="tipo"
+            [(ngModel)]="nuevaBotella.tipo"
+            name="tipo"
+            placeholder="Ej: Refresco"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="capacidad">📏 Capacidad (L)</label>
+          <input
+            type="number"
+            id="capacidad"
+            [(ngModel)]="nuevaBotella.capacidadLitros"
+            name="capacidad"
+            step="0.1"
+            placeholder="0.0"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="vacia">📦 Estado</label>
+          <select
+            id="vacia"
+            [(ngModel)]="nuevaBotella.vacia"
+            name="vacia"
+            class="form-control"
+          >
+            <option [ngValue]="false">Llena</option>
+            <option [ngValue]="true">Vacía</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          (click)="agregarBotella()"
+          class="btn btn-success"
+          [disabled]="cargando"
+        >
+          {{ editingId ? '💾 Guardar Cambios' : '➕ Agregar Botella' }}
+        </button>
+        
+        <button
+          *ngIf="editingId"
+          type="button"
+          (click)="cancelarEdicion()"
+          class="btn btn-warning"
+        >
+          ❌ Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de botellas -->
+  <div class="list-section">
+    <h2 class="list-title">📋 Lista de Botellas</h2>
+
+    <div *ngIf="cargando" class="loading-state">
+      <p>Cargando botellas...</p>
+    </div>
+    
+    <div *ngIf="!cargando && botellas.length === 0" class="empty-state">
+      <p>No hay botellas registradas. ¡Crea la primera!</p>
+    </div>
+
+    <div class="cards-grid" *ngIf="!cargando && botellas.length > 0">
+      <div
+        *ngFor="let botella of botellas"
+        class="botella-card"
+        [class.vacia]="botella.vacia"
+      >
+        <div class="card-header">
+          <span class="card-status">{{ botella.vacia ? '📦 Vacía' : '🍾 Llena' }}</span>
+        </div>
+        
+        <div class="card-body">
+          <h3 class="card-title">{{ botella.marca }}</h3>
+          <div class="card-details">
+            <p><strong>Tipo:</strong> {{ botella.tipo }}</p>
+            <p><strong>Capacidad:</strong> {{ botella.capacidadLitros }} L</p>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button
+            (click)="editarBotella(botella)"
+            class="btn btn-warning btn-sm"
+          >
+            ✏️ Editar
+          </button>
+          <button
+            (click)="eliminarBotella(botella.id)"
+            class="btn btn-danger btn-sm"
+          >
+            🗑️ Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
