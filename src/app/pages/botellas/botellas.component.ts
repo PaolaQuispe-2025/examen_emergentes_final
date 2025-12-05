@@ -12,7 +12,7 @@ import { BotellaService, Botella } from '../../services/botella';
 })
 export class BotellasComponent implements OnInit {
   botellas: Botella[] = [];
-  nuevaBotella: Botella = { marca: '', tipo: '', capacidadLitros: 0, vacia: false };
+  nuevaBotella: Botella = { marca: '', tipo: '', capacidadLitros: 0, vacia: false ,};
   editingId: number | null = null;
   cargando = false;
 
@@ -57,6 +57,6 @@ export class BotellasComponent implements OnInit {
   }
 
   limpiarFormulario() {
-    this.nuevaBotella = { marca: '', tipo: '', capacidadLitros: 0, vacia: false };
+    this.nuevaBotella = { marca: '', tipo: '', capacidadLitros: 0, vacia: false, };
   }
 }

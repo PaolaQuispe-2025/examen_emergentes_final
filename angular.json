@@ -27,7 +27,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "ssr": false
+            "ssr": false,
+            "outputPath": "dist/botellas_mesas/browser"
+            
+
           },
           "configurations": {
             "production": {
@@ -67,6 +70,17 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "branch": "gh-pages",
+            "dir": "dist/botellas_mesas/browser"
+          },
+          "configurations": {
+            "production": {},
+            "development": {}
+          }
         }
       }
     }

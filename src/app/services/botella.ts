@@ -20,7 +20,7 @@ export class BotellaService {
   private nextId = 1;
 
   // Si tienes un backend real, coloca la URL aquí
-  private apiUrl = 'http://localhost:8080/botellas';
+  private apiUrl = 'https://scratch-gis-singing-walls.trycloudflare.com/botellas';
 
   constructor(private http?: HttpClient) {
     this.cargarDatosLocal();
